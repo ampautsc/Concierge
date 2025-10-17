@@ -68,9 +68,8 @@ const WelcomeScreen = () => {
         </header>
 
         <main className="welcome-main">
-          <div className="concierge-desk">
+          <div className="concierge-image">
             <ConciergeAnimal />
-            <div className="desk"></div>
           </div>
 
           <div className="welcome-message">
@@ -153,77 +152,32 @@ const WelcomeScreen = () => {
   );
 };
 
-// Cartoon Bear Concierge Component
+// Bear Concierge Image Component  
 const ConciergeAnimal = ({ animate = false }) => {
+  // Try PNG first, fallback to SVG placeholder
+  // To use the actual image: Download from https://github.com/ampautsc/Concierge/issues/3
+  // and save as public/images/bear-concierge.png
+  const imageSrc = '/images/bear-concierge.png';
+  const fallbackSrc = '/images/bear-concierge.svg';
+  
   return (
-    <svg 
+    <img 
+      src={imageSrc}
+      onError={(e) => { 
+        if (e.target.src.endsWith('.png')) {
+          e.target.src = fallbackSrc;
+        }
+      }}
+      alt="Bear Concierge"
       className={`concierge-animal ${animate ? 'bowing' : ''}`}
-      viewBox="0 0 200 250" 
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      {/* Bear ears */}
-      <ellipse cx="60" cy="60" rx="25" ry="28" fill="#8B5A3C"/>
-      <ellipse cx="140" cy="60" rx="25" ry="28" fill="#8B5A3C"/>
-      <ellipse cx="60" cy="65" rx="15" ry="18" fill="#D4A574"/>
-      <ellipse cx="140" cy="65" rx="15" ry="18" fill="#D4A574"/>
-      
-      {/* Head */}
-      <circle cx="100" cy="100" r="55" fill="#8B5A3C"/>
-      
-      {/* Snout */}
-      <ellipse cx="100" cy="115" rx="35" ry="30" fill="#D4A574"/>
-      
-      {/* Eyes */}
-      <circle cx="80" cy="95" r="8" fill="#2C1810"/>
-      <circle cx="120" cy="95" r="8" fill="#2C1810"/>
-      <circle cx="82" cy="92" r="3" fill="white"/>
-      <circle cx="122" cy="92" r="3" fill="white"/>
-      
-      {/* Nose */}
-      <ellipse cx="100" cy="110" rx="12" ry="10" fill="#2C1810"/>
-      
-      {/* Smile */}
-      <path 
-        d="M 85 120 Q 100 128 115 120" 
-        stroke="#2C1810" 
-        strokeWidth="2" 
-        fill="none"
-        strokeLinecap="round"
-      />
-      
-      {/* Body with suit vest */}
-      <ellipse cx="100" cy="180" rx="45" ry="50" fill="#8B5A3C"/>
-      
-      {/* Vest */}
-      <path 
-        d="M 70 155 L 65 180 L 80 210 L 100 215 L 120 210 L 135 180 L 130 155 L 100 160 Z" 
-        fill="#2C3E50"
-      />
-      
-      {/* Bow tie */}
-      <path 
-        d="M 80 145 L 75 150 L 80 155 L 90 150 Z" 
-        fill="#E74C3C"
-      />
-      <path 
-        d="M 120 145 L 125 150 L 120 155 L 110 150 Z" 
-        fill="#E74C3C"
-      />
-      <rect x="88" y="148" width="24" height="4" fill="#E74C3C" rx="2"/>
-      
-      {/* Arms */}
-      <ellipse cx="55" cy="175" rx="18" ry="35" fill="#8B5A3C" transform="rotate(-20 55 175)"/>
-      <ellipse cx="145" cy="175" rx="18" ry="35" fill="#8B5A3C" transform="rotate(20 145 175)"/>
-      
-      {/* Paws */}
-      <ellipse cx="50" cy="205" rx="12" ry="15" fill="#D4A574"/>
-      <ellipse cx="150" cy="205" rx="12" ry="15" fill="#D4A574"/>
-      
-      {/* Vest buttons */}
-      <circle cx="100" cy="175" r="3" fill="#ECF0F1"/>
-      <circle cx="100" cy="190" r="3" fill="#ECF0F1"/>
-      <circle cx="100" cy="205" r="3" fill="#ECF0F1"/>
-    </svg>
+      style={{
+        width: '100%',
+        maxWidth: '400px',
+        height: 'auto',
+        display: 'block',
+        margin: '0 auto'
+      }}
+    />
   );
 };
 
