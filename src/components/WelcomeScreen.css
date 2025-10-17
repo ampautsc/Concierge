@@ -1,0 +1,418 @@
+.welcome-screen {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.welcome-container {
+  max-width: 800px;
+  width: 100%;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.welcome-header {
+  background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+.welcome-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.welcome-subtitle {
+  font-size: 1.2rem;
+  opacity: 0.95;
+}
+
+.welcome-main {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.concierge-desk {
+  position: relative;
+  margin: 0 auto 2rem;
+  width: 300px;
+  height: 350px;
+}
+
+.concierge-animal {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 250px;
+  z-index: 2;
+  transition: transform 0.5s ease;
+}
+
+.concierge-animal.bowing {
+  animation: bow 2s ease-in-out;
+}
+
+@keyframes bow {
+  0%, 100% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  50% {
+    transform: translateX(-50%) rotate(15deg);
+  }
+}
+
+.desk {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  height: 120px;
+  background: linear-gradient(180deg, #8B4513 0%, #654321 100%);
+  border-radius: 12px 12px 0 0;
+  z-index: 1;
+}
+
+.desk::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 290px;
+  height: 30px;
+  background: linear-gradient(180deg, #A0522D 0%, #8B4513 100%);
+  border-radius: 8px;
+}
+
+.desk::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 50px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-message {
+  margin-bottom: 2rem;
+}
+
+.welcome-message h2 {
+  color: var(--success);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.welcome-message p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.member-button {
+  background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%);
+  color: white;
+  border: none;
+  padding: 1.2rem 3rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(45, 80, 22, 0.3);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.member-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(45, 80, 22, 0.4);
+}
+
+.member-button:active {
+  transform: translateY(-1px);
+}
+
+.login-options {
+  animation: fadeIn 0.5s ease;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.login-options h3 {
+  color: var(--success);
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.login-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 14px 24px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.login-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.microsoft-btn {
+  border-color: #00a4ef;
+}
+
+.microsoft-btn:hover:not(:disabled) {
+  border-color: #0078d4;
+  background: #f3f9ff;
+}
+
+.google-btn {
+  border-color: #4285F4;
+}
+
+.google-btn:hover:not(:disabled) {
+  border-color: #357ae8;
+  background: #f8f9ff;
+}
+
+.apple-btn {
+  border-color: #000;
+  color: #000;
+}
+
+.apple-btn:hover:not(:disabled) {
+  background: #f5f5f5;
+}
+
+.back-button {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.back-button:hover {
+  color: var(--primary-green);
+}
+
+.error-message {
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: #c33;
+}
+
+.welcome-footer {
+  background: var(--success);
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.9rem;
+}
+
+/* Transition Screen */
+.transition-screen {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.5s ease;
+}
+
+.transition-content {
+  text-align: center;
+  color: white;
+}
+
+.concierge-bow {
+  margin-bottom: 2rem;
+}
+
+.concierge-bow .concierge-animal {
+  position: relative;
+  left: 0;
+  transform: none;
+  display: inline-block;
+}
+
+.transition-message {
+  font-size: 3rem;
+  font-weight: 300;
+  margin-bottom: 3rem;
+  animation: fadeInUp 1s ease;
+  font-family: serif;
+  font-style: italic;
+}
+
+.door-animation {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  margin: 0 auto;
+  perspective: 1000px;
+}
+
+.door-left, .door-right {
+  position: absolute;
+  top: 0;
+  width: 150px;
+  height: 400px;
+  background: linear-gradient(to right, #8B4513, #654321);
+  border: 3px solid #4a2f1a;
+}
+
+.door-left {
+  left: 0;
+  transform-origin: left;
+  animation: openDoorLeft 2s ease 0.5s forwards;
+  border-right: none;
+}
+
+.door-right {
+  right: 0;
+  transform-origin: right;
+  animation: openDoorRight 2s ease 0.5s forwards;
+  border-left: none;
+}
+
+@keyframes openDoorLeft {
+  to {
+    transform: rotateY(-120deg);
+    opacity: 0;
+  }
+}
+
+@keyframes openDoorRight {
+  to {
+    transform: rotateY(120deg);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .welcome-screen {
+    padding: 1rem;
+  }
+
+  .welcome-header h1 {
+    font-size: 2rem;
+  }
+
+  .welcome-subtitle {
+    font-size: 1rem;
+  }
+
+  .welcome-main {
+    padding: 2rem 1rem;
+  }
+
+  .concierge-desk {
+    width: 250px;
+    height: 300px;
+  }
+
+  .concierge-animal {
+    width: 160px;
+    height: 200px;
+  }
+
+  .desk {
+    width: 230px;
+    height: 100px;
+  }
+
+  .desk::before {
+    width: 240px;
+    height: 25px;
+  }
+
+  .welcome-message h2 {
+    font-size: 1.5rem;
+  }
+
+  .welcome-message p {
+    font-size: 1rem;
+  }
+
+  .member-button {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
+
+  .transition-message {
+    font-size: 2rem;
+  }
+
+  .door-animation {
+    width: 200px;
+    height: 300px;
+  }
+
+  .door-left, .door-right {
+    width: 100px;
+    height: 300px;
+  }
+}
