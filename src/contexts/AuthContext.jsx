@@ -63,7 +63,18 @@ export const AuthProvider = ({ children }) => {
       setAuthProvider('firebase');
       return result.user;
     } catch (error) {
-      setError(error.message);
+      let errorMessage = error.message;
+      
+      // Provide helpful setup instructions for common Firebase errors
+      if (error.code === 'auth/internal-error' || error.message.includes('internal-error')) {
+        errorMessage = 'Firebase authentication is not configured. Please follow the setup instructions in SETUP.md to configure Firebase Authentication with your project credentials.';
+      } else if (error.code === 'auth/popup-blocked') {
+        errorMessage = 'Pop-up was blocked by your browser. Please allow pop-ups for this site and try again.';
+      } else if (error.code === 'auth/popup-closed-by-user') {
+        errorMessage = 'Sign-in was cancelled. Please try again.';
+      }
+      
+      setError(errorMessage);
       console.error('Google sign-in error:', error);
       throw error;
     }
@@ -76,7 +87,18 @@ export const AuthProvider = ({ children }) => {
       setAuthProvider('firebase');
       return result.user;
     } catch (error) {
-      setError(error.message);
+      let errorMessage = error.message;
+      
+      // Provide helpful setup instructions for common Firebase errors
+      if (error.code === 'auth/internal-error' || error.message.includes('internal-error')) {
+        errorMessage = 'Firebase authentication is not configured. Please follow the setup instructions in SETUP.md to configure Firebase Authentication with your project credentials.';
+      } else if (error.code === 'auth/popup-blocked') {
+        errorMessage = 'Pop-up was blocked by your browser. Please allow pop-ups for this site and try again.';
+      } else if (error.code === 'auth/popup-closed-by-user') {
+        errorMessage = 'Sign-in was cancelled. Please try again.';
+      }
+      
+      setError(errorMessage);
       console.error('Apple sign-in error:', error);
       throw error;
     }
@@ -99,7 +121,18 @@ export const AuthProvider = ({ children }) => {
       setAuthProvider('azure');
       return msUser;
     } catch (error) {
-      setError(error.message || 'Microsoft sign-in failed');
+      let errorMessage = error.message || 'Microsoft sign-in failed';
+      
+      // Provide helpful setup instructions for common Azure AD errors
+      if (error.errorCode === 'invalid_client' || errorMessage.includes('AADSTS')) {
+        errorMessage = 'Azure AD authentication is not configured. Please follow the setup instructions in SETUP.md to configure Microsoft sign-in with your Azure AD credentials.';
+      } else if (error.errorCode === 'popup_window_error') {
+        errorMessage = 'Pop-up was blocked by your browser. Please allow pop-ups for this site and try again.';
+      } else if (error.errorCode === 'user_cancelled') {
+        errorMessage = 'Sign-in was cancelled. Please try again.';
+      }
+      
+      setError(errorMessage);
       console.error('Microsoft sign-in error:', error);
       throw error;
     }

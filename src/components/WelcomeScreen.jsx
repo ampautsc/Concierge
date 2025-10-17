@@ -131,6 +131,11 @@ const WelcomeScreen = () => {
               {error && (
                 <div className="error-message">
                   <p>⚠️ {error}</p>
+                  {(error.includes('not configured') || error.includes('SETUP.md')) && (
+                    <p className="setup-link">
+                      📖 See <a href="https://github.com/ampautsc/Concierge/blob/main/SETUP.md" target="_blank" rel="noopener noreferrer">SETUP.md</a> for configuration instructions.
+                    </p>
+                  )}
                 </div>
               )}
 
