@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habitat Restoration Concierge | Camp Monarch</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🦋 Habitat Restoration Concierge</h1>
+            <p class="tagline">Start restoring habitat—right where you live</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Welcome Section -->
+        <section id="welcome" class="card">
+            <h2>Welcome! Let's Begin Your Habitat Journey</h2>
+            <p>Whether you have a balcony or a backyard, we'll help you begin, grow, and celebrate every win for wildlife.</p>
+            <button onclick="startOnboarding()" class="btn-primary">Get Started</button>
+        </section>
+
+        <!-- Onboarding Section -->
+        <section id="onboarding" class="card hidden">
+            <h2>Tell Us About Your Space</h2>
+            <form id="onboarding-form">
+                <div class="form-group">
+                    <label for="space-type">What type of space do you have?</label>
+                    <select id="space-type" required>
+                        <option value="">Select one...</option>
+                        <option value="balcony">Balcony</option>
+                        <option value="patio">Patio</option>
+                        <option value="small-yard">Small Yard</option>
+                        <option value="backyard">Backyard</option>
+                        <option value="large-property">Large Property</option>
+                        <option value="community-space">Community Space</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="zip-code">Your ZIP Code (for local recommendations):</label>
+                    <input type="text" id="zip-code" pattern="[0-9]{5}" placeholder="12345" required>
+                </div>
+                <div class="form-group">
+                    <label for="experience">Your experience level:</label>
+                    <select id="experience" required>
+                        <option value="">Select one...</option>
+                        <option value="beginner">Beginner - Just starting out</option>
+                        <option value="intermediate">Intermediate - Some gardening experience</option>
+                        <option value="advanced">Advanced - Experienced gardener</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Continue</button>
+            </form>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="hidden">
+            <div class="dashboard-header">
+                <h2>Your Habitat Dashboard</h2>
+                <p class="user-space-info"></p>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <button onclick="showSection('plants')" class="action-card">
+                    <span class="icon">🌱</span>
+                    <h3>Native Plants</h3>
+                    <p>Discover plants for your region</p>
+                </button>
+                <button onclick="showSection('projects')" class="action-card">
+                    <span class="icon">🔨</span>
+                    <h3>Projects</h3>
+                    <p>Simple habitat projects</p>
+                </button>
+                <button onclick="showSection('goals')" class="action-card">
+                    <span class="icon">🎯</span>
+                    <h3>My Goals</h3>
+                    <p>Set and track progress</p>
+                </button>
+                <button onclick="showSection('neighbors')" class="action-card">
+                    <span class="icon">🤝</span>
+                    <h3>Connect</h3>
+                    <p>Find local neighbors</p>
+                </button>
+                <button onclick="showSection('events')" class="action-card">
+                    <span class="icon">📅</span>
+                    <h3>Events</h3>
+                    <p>Workshops & activities</p>
+                </button>
+                <button onclick="showSection('resources')" class="action-card">
+                    <span class="icon">📚</span>
+                    <h3>Resources</h3>
+                    <p>Guides & funding</p>
+                </button>
+            </div>
+
+            <!-- Progress Tracker -->
+            <div class="card progress-card">
+                <h3>Your Progress</h3>
+                <div id="progress-stats">
+                    <div class="stat">
+                        <span class="stat-value" id="plants-added">0</span>
+                        <span class="stat-label">Native Plants Added</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="projects-completed">0</span>
+                        <span class="stat-label">Projects Completed</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="neighbors-connected">0</span>
+                        <span class="stat-label">Neighbors Connected</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reminders -->
+            <div class="card">
+                <h3>Upcoming Reminders</h3>
+                <div id="reminders-list">
+                    <p class="empty-state">No reminders set. Add some from your goals!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Native Plants Section -->
+        <section id="plants" class="content-section hidden">
+            <button onclick="showSection('dashboard')" class="btn-back">← Back to Dashboard</button>
+            <h2>Native Plants for Your Region</h2>
+            <div class="search-bar">
+                <input type="text" id="plant-search" placeholder="Search plants by name...">
+            </div>
+            <div id="plants-list" class="grid"></div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="content-section hidden">
+            <button onclick="showSection('dashboard')" class="btn-back">← Back to Dashboard</button>
+            <h2>Habitat Restoration Projects</h2>
+            <div class="filter-bar">
+                <label>Difficulty: </label>
+                <button onclick="filterProjects('all')" class="filter-btn active">All</button>
+                <button onclick="filterProjects('easy')" class="filter-btn">Easy</button>
+                <button onclick="filterProjects('medium')" class="filter-btn">Medium</button>
+                <button onclick="filterProjects('advanced')" class="filter-btn">Advanced</button>
+            </div>
+            <div id="projects-list" class="grid"></div>
+        </section>
+
+        <!-- Goals Section -->
+        <section id="goals" class="content-section hidden">
+            <button onclick="showSection('dashboard')" class="btn-back">← Back to Dashboard</button>
+            <h2>My Goals</h2>
+            <div class="card">
+                <h3>Create New Goal</h3>
+                <form id="goal-form">
+                    <div class="form-group">
+                        <label for="goal-title">Goal:</label>
+                        <input type="text" id="goal-title" placeholder="e.g., Plant 3 native species" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="goal-deadline">Target Date:</label>
+                        <input type="date" id="goal-deadline" required>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="goal-reminder">
+                            Send me reminders
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-primary">Add Goal</button>
+                </form>
+            </div>
+            <div class="card">
+                <h3>Active Goals</h3>
+                <div id="goals-list">
+                    <p class="empty-state">No goals yet. Create your first one above!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Neighbors Section -->
+        <section id="neighbors" class="content-section hidden">
+            <button onclick="showSection('dashboard')" class="btn-back">← Back to Dashboard</button>
+            <h2>Connect with Local Habitat Restorers</h2>
+            <div class="card">
+                <h3>Find Neighbors</h3>
+                <p>Connect with others in your area who are restoring habitat. Share experiences, trade plants, and collaborate on projects.</p>
+                <div id="neighbors-list" class="neighbors-grid"></div>
+            </div>
+            <div class="card">
+                <h3>Local Mentors</h3>
+                <p>Connect with experienced habitat restoration mentors in your area.</p>
+                <div id="mentors-list" class="mentors-grid"></div>
+            </div>
+        </section>
+
+        <!-- Events Section -->
+        <section id="events" class="content-section hidden">
+            <button onclick="showSection('dashboard')" class="btn-back">← Back to Dashboard</button>
+            <h2>Local Events & Workshops</h2>
+            <div class="filter-bar">
+                <label>Type: </label>
+                <button onclick="filterEvents('all')" class="filter-btn active">All</button>
+                <button onclick="filterEvents('workshop')" class="filter-btn">Workshops</button>
+                <button onclick="filterEvents('planting')" class="filter-btn">Planting Days</button>
+                <button onclick="filterEvents('tour')" class="filter-btn">Garden Tours</button>
+            </div>
+            <div id="events-list" class="events-grid"></div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="content-section hidden">
+            <button onclick="showSection('dashboard')" class="btn-back">← Back to Dashboard</button>
+            <h2>Resources & Support</h2>
+            
+            <div class="card">
+                <h3>📖 Essential Guides</h3>
+                <ul class="resource-list">
+                    <li><a href="https://planeteerhandbook.com" target="_blank" rel="noopener">Planeteer Handbook - Complete restoration guide</a></li>
+                    <li><a href="#" onclick="showGuide('native-plants')">Native Plants Selection Guide</a></li>
+                    <li><a href="#" onclick="showGuide('soil-health')">Soil Health Basics</a></li>
+                    <li><a href="#" onclick="showGuide('wildlife-friendly')">Creating Wildlife-Friendly Spaces</a></li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>💰 Funding Opportunities</h3>
+                <ul class="resource-list">
+                    <li>
+                        <strong>Community Grants</strong>
+                        <p>Local habitat restoration grants up to $5,000</p>
+                    </li>
+                    <li>
+                        <strong>Native Plant Rebate Programs</strong>
+                        <p>Get reimbursed for purchasing native plants</p>
+                    </li>
+                    <li>
+                        <strong>Pollinator Garden Grants</strong>
+                        <p>Funding specifically for pollinator-friendly projects</p>
+                    </li>
+                    <li>
+                        <strong>Backyard Habitat Certification</strong>
+                        <p>Get certified and access special funding</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>🛠️ Tools & Calculators</h3>
+                <ul class="resource-list">
+                    <li><button onclick="openTool('space-calculator')" class="btn-link">Space Planning Calculator</button></li>
+                    <li><button onclick="openTool('plant-selector')" class="btn-link">Native Plant Selector Tool</button></li>
+                    <li><button onclick="openTool('cost-estimator')" class="btn-link">Project Cost Estimator</button></li>
+                    <li><button onclick="openTool('impact-tracker')" class="btn-link">Wildlife Impact Tracker</button></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Camp Monarch - Habitat Restoration Concierge</p>
+            <p>Together, we restore habitat one space at a time 🦋</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
