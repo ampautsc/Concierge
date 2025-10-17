@@ -63,8 +63,8 @@ const WelcomeScreen = () => {
     <div className="welcome-screen">
       <div className="welcome-container">
         <header className="welcome-header">
-          <h1>🌿 Conservation Cafe</h1>
-          <p className="welcome-subtitle">Your Gateway to Habitat Restoration</p>
+          <h1>🦋 Camp Monarch</h1>
+          <p className="welcome-subtitle">Habitat Restoration Concierge</p>
         </header>
 
         <main className="welcome-main">
@@ -74,8 +74,8 @@ const WelcomeScreen = () => {
           </div>
 
           <div className="welcome-message">
-            <h2>Welcome to the Conservation Cafe</h2>
-            <p>Where nature lovers gather to restore wildlife habitat</p>
+            <h2>Welcome to the Habitat Restoration Concierge</h2>
+            <p>Your personal guide to restoring wildlife habitat</p>
           </div>
 
           {!showLoginOptions ? (
@@ -146,14 +146,14 @@ const WelcomeScreen = () => {
         </main>
 
         <footer className="welcome-footer">
-          <p>&copy; 2025 Conservation Cafe - Where every visit helps restore habitat 🌿</p>
+          <p>&copy; 2025 Camp Monarch - Together, we restore habitat one space at a time 🦋</p>
         </footer>
       </div>
     </div>
   );
 };
 
-// Friendly Gecko Doorman Component
+// Cartoon Bear Concierge Component
 const ConciergeAnimal = ({ animate = false }) => {
   return (
     <svg 
@@ -161,101 +161,68 @@ const ConciergeAnimal = ({ animate = false }) => {
       viewBox="0 0 200 250" 
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Gecko head */}
-      <ellipse cx="100" cy="85" rx="50" ry="45" fill="#7CB342"/>
+      {/* Bear ears */}
+      <ellipse cx="60" cy="60" rx="25" ry="28" fill="#8B5A3C"/>
+      <ellipse cx="140" cy="60" rx="25" ry="28" fill="#8B5A3C"/>
+      <ellipse cx="60" cy="65" rx="15" ry="18" fill="#D4A574"/>
+      <ellipse cx="140" cy="65" rx="15" ry="18" fill="#D4A574"/>
       
-      {/* Eyes - large and friendly */}
-      <g>
-        {/* Left eye */}
-        <ellipse cx="80" cy="75" rx="18" ry="20" fill="#FFF9C4"/>
-        <ellipse cx="80" cy="75" rx="12" ry="14" fill="#2C3E50"/>
-        <circle cx="82" cy="72" r="5" fill="white"/>
-        
-        {/* Right eye */}
-        <ellipse cx="120" cy="75" rx="18" ry="20" fill="#FFF9C4"/>
-        <ellipse cx="120" cy="75" rx="12" ry="14" fill="#2C3E50"/>
-        <circle cx="122" cy="72" r="5" fill="white"/>
-      </g>
+      {/* Head */}
+      <circle cx="100" cy="100" r="55" fill="#8B5A3C"/>
       
-      {/* Nostril dots */}
-      <circle cx="90" cy="95" r="3" fill="#558B2F"/>
-      <circle cx="110" cy="95" r="3" fill="#558B2F"/>
+      {/* Snout */}
+      <ellipse cx="100" cy="115" rx="35" ry="30" fill="#D4A574"/>
       
-      {/* Friendly smile */}
+      {/* Eyes */}
+      <circle cx="80" cy="95" r="8" fill="#2C1810"/>
+      <circle cx="120" cy="95" r="8" fill="#2C1810"/>
+      <circle cx="82" cy="92" r="3" fill="white"/>
+      <circle cx="122" cy="92" r="3" fill="white"/>
+      
+      {/* Nose */}
+      <ellipse cx="100" cy="110" rx="12" ry="10" fill="#2C1810"/>
+      
+      {/* Smile */}
       <path 
-        d="M 80 100 Q 100 110 120 100" 
-        stroke="#558B2F" 
-        strokeWidth="3" 
+        d="M 85 120 Q 100 128 115 120" 
+        stroke="#2C1810" 
+        strokeWidth="2" 
         fill="none"
         strokeLinecap="round"
       />
       
-      {/* Neck/body */}
-      <ellipse cx="100" cy="140" rx="40" ry="35" fill="#7CB342"/>
+      {/* Body with suit vest */}
+      <ellipse cx="100" cy="180" rx="45" ry="50" fill="#8B5A3C"/>
       
-      {/* Spots on head for character */}
-      <circle cx="65" cy="80" r="6" fill="#558B2F" opacity="0.6"/>
-      <circle cx="135" cy="80" r="6" fill="#558B2F" opacity="0.6"/>
-      <circle cx="100" cy="60" r="5" fill="#558B2F" opacity="0.6"/>
-      
-      {/* Doorman vest */}
+      {/* Vest */}
       <path 
-        d="M 70 125 L 65 145 L 75 170 L 100 175 L 125 170 L 135 145 L 130 125 L 100 130 Z" 
-        fill="#8D6E63"
+        d="M 70 155 L 65 180 L 80 210 L 100 215 L 120 210 L 135 180 L 130 155 L 100 160 Z" 
+        fill="#2C3E50"
       />
-      
-      {/* Vest lapels */}
-      <path 
-        d="M 70 125 L 80 130 L 85 145 L 75 170" 
-        fill="#6D4C41"
-        opacity="0.5"
-      />
-      <path 
-        d="M 130 125 L 120 130 L 115 145 L 125 170" 
-        fill="#6D4C41"
-        opacity="0.5"
-      />
-      
-      {/* Name tag */}
-      <rect x="85" y="145" width="30" height="15" fill="#FFF9C4" rx="2"/>
-      <text x="100" y="155" fontSize="8" fill="#2C3E50" textAnchor="middle" fontWeight="bold">HOST</text>
       
       {/* Bow tie */}
       <path 
-        d="M 80 120 L 75 125 L 80 130 L 90 125 Z" 
-        fill="#D32F2F"
+        d="M 80 145 L 75 150 L 80 155 L 90 150 Z" 
+        fill="#E74C3C"
       />
       <path 
-        d="M 120 120 L 125 125 L 120 130 L 110 125 Z" 
-        fill="#D32F2F"
+        d="M 120 145 L 125 150 L 120 155 L 110 150 Z" 
+        fill="#E74C3C"
       />
-      <rect x="88" y="123" width="24" height="4" fill="#D32F2F" rx="2"/>
+      <rect x="88" y="148" width="24" height="4" fill="#E74C3C" rx="2"/>
       
-      {/* Front legs/arms */}
-      <ellipse cx="60" cy="160" rx="15" ry="25" fill="#7CB342" transform="rotate(-15 60 160)"/>
-      <ellipse cx="140" cy="160" rx="15" ry="25" fill="#7CB342" transform="rotate(15 140 160)"/>
+      {/* Arms */}
+      <ellipse cx="55" cy="175" rx="18" ry="35" fill="#8B5A3C" transform="rotate(-20 55 175)"/>
+      <ellipse cx="145" cy="175" rx="18" ry="35" fill="#8B5A3C" transform="rotate(20 145 175)"/>
       
-      {/* Gecko toes on front legs */}
-      <g opacity="0.7">
-        <circle cx="55" cy="180" r="4" fill="#558B2F"/>
-        <circle cx="50" cy="185" r="4" fill="#558B2F"/>
-        <circle cx="145" cy="180" r="4" fill="#558B2F"/>
-        <circle cx="150" cy="185" r="4" fill="#558B2F"/>
-      </g>
+      {/* Paws */}
+      <ellipse cx="50" cy="205" rx="12" ry="15" fill="#D4A574"/>
+      <ellipse cx="150" cy="205" rx="12" ry="15" fill="#D4A574"/>
       
       {/* Vest buttons */}
-      <circle cx="100" cy="145" r="3" fill="#FFD54F"/>
-      <circle cx="100" cy="155" r="3" fill="#FFD54F"/>
-      <circle cx="100" cy="165" r="3" fill="#FFD54F"/>
-      
-      {/* Tail visible behind (adds character) */}
-      <path 
-        d="M 95 175 Q 85 190 80 210 Q 78 220 85 225" 
-        stroke="#7CB342" 
-        strokeWidth="12" 
-        fill="none"
-        strokeLinecap="round"
-      />
+      <circle cx="100" cy="175" r="3" fill="#ECF0F1"/>
+      <circle cx="100" cy="190" r="3" fill="#ECF0F1"/>
+      <circle cx="100" cy="205" r="3" fill="#ECF0F1"/>
     </svg>
   );
 };
