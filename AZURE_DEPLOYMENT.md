@@ -41,7 +41,7 @@ The application is configured for deployment to Azure Static Web Apps with the f
    - **Region**: Choose closest to your users
    - **Source**: GitHub
    - **Organization**: Your GitHub username/org
-   - **Repository**: ampautsc/Concierge
+   - **Repository**: your-username/Concierge (or your fork)
    - **Branch**: main
 
 4. Build Details:
@@ -72,7 +72,7 @@ az group create \
 az staticwebapp create \
   --name concierge-app \
   --resource-group concierge-rg \
-  --source https://github.com/ampautsc/Concierge \
+  --source https://github.com/your-username/Concierge \
   --branch main \
   --app-location "/" \
   --output-location "dist" \
