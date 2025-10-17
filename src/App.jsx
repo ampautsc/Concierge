@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { AuthProvider } from './contexts/AuthContext'
-import Login from './components/Login'
-import Dashboard from './components/Dashboard'
+import WelcomeScreen from './components/WelcomeScreen'
 import './App.css'
 
 function App() {
@@ -17,7 +16,7 @@ function App() {
 function AppContent() {
   return (
     <div className="app-container">
-      <Login />
+      <WelcomeScreen />
     </div>
   )
 }
