@@ -4,16 +4,17 @@ Camp Monarch's personal organizer for habitat restoration. Start restoring habit
 
 ## Overview
 
-The Habitat Restoration Concierge is a React-based web application that helps individuals organize their habitat restoration journey. It provides curated links to trusted resources, helps track personal goals, and connects users with local events and opportunities—without storing plant data or conservation information directly.
+The Habitat Restoration Concierge is a React-based web application that helps individuals organize their habitat restoration journey. Featuring a friendly concierge experience, the app welcomes users with a cartoon bear guide and provides curated links to trusted resources, helps track personal goals, and connects users with local events and opportunities—without storing plant data or conservation information directly.
 
 **Key Philosophy**: This concierge points you to the right resources and helps you stay organized. It knows *where* to find information and *when* to get started, but doesn't replace comprehensive databases like the Planeteer Handbook.
 
 ## Features
 
 ### 🔐 Secure Authentication
-- Sign in with Google or Apple
-- Powered by Firebase Authentication
+- Sign in with Microsoft (Azure AD), Google, or Apple
+- Powered by Azure AD and Firebase Authentication
 - Secure, industry-standard authentication flow
+- Friendly concierge welcome screen with "I'm a member" button
 
 ### 📚 Resource Hub
 Curated links to trusted resources:
@@ -45,9 +46,12 @@ Links to find:
 
 - **Frontend**: React 19
 - **Build Tool**: Vite
-- **Authentication**: Firebase Auth (Google & Apple Sign-In)
-- **Styling**: Custom CSS
-- **Deployment Ready**: Static build output
+- **Authentication**: 
+  - Azure AD (Microsoft Entra ID) with MSAL
+  - Firebase Auth (Google & Apple Sign-In)
+- **Styling**: Custom CSS with SVG illustrations
+- **Hosting**: Azure Static Web Apps
+- **CI/CD**: GitHub Actions
 
 ## Getting Started
 
@@ -55,6 +59,7 @@ Links to find:
 
 - Node.js 18+ and npm
 - Firebase account (free tier works fine)
+- Azure account (for Azure AD authentication and deployment)
 
 ### Installation
 
@@ -69,8 +74,10 @@ Links to find:
    npm install
    ```
 
-3. **Set up Firebase Authentication**
+3. **Set up Authentication**
 
+   **Firebase Authentication:**
+   
    a. Go to [Firebase Console](https://console.firebase.google.com/)
    
    b. Create a new project or use an existing one
@@ -86,19 +93,41 @@ Links to find:
       - Click "Web app" icon to register a new web app
       - Copy the configuration values
 
+   **Azure AD Authentication (Microsoft Sign-In):**
+   
+   a. Go to [Azure Portal](https://portal.azure.com)
+   
+   b. Navigate to Azure Active Directory > App registrations > New registration
+   
+   c. Configure your app:
+      - Name: Habitat Restoration Concierge
+      - Supported account types: Accounts in any organizational directory and personal Microsoft accounts
+      - Redirect URI: Single-page application (SPA) - http://localhost:5173
+   
+   d. Note your Application (client) ID and Directory (tenant) ID
+   
+   e. Configure API permissions:
+      - Add Microsoft Graph > Delegated permissions
+      - Add: User.Read, openid, profile, email
+
 4. **Configure environment variables**
    ```bash
    cp .env.example .env
    ```
    
-   Edit `.env` and add your Firebase credentials:
+   Edit `.env` and add your credentials:
    ```
+   # Firebase
    VITE_FIREBASE_API_KEY=your_actual_api_key
    VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
    VITE_FIREBASE_PROJECT_ID=your_project_id
    VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
    VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
    VITE_FIREBASE_APP_ID=your_app_id
+   
+   # Azure AD
+   VITE_AZURE_CLIENT_ID=your_azure_client_id
+   VITE_AZURE_TENANT_ID=your_azure_tenant_id
    ```
 
 5. **Run the development server**
@@ -120,36 +149,46 @@ The build output will be in the `dist/` directory, ready to deploy to any static
 
 ```
 Concierge/
+├── .github/
+│   └── workflows/
+│       └── azure-static-web-apps.yml  # Azure deployment
 ├── src/
 │   ├── components/
 │   │   ├── Dashboard.jsx       # Main dashboard with tabs
 │   │   ├── Dashboard.css
-│   │   ├── Login.jsx           # Authentication page
+│   │   ├── WelcomeScreen.jsx   # Concierge welcome screen
+│   │   ├── WelcomeScreen.css
+│   │   ├── Login.jsx           # Legacy authentication page
 │   │   └── Login.css
 │   ├── contexts/
-│   │   └── AuthContext.jsx     # Firebase auth context
+│   │   └── AuthContext.jsx     # Multi-provider auth context
 │   ├── config/
-│   │   └── firebase.js         # Firebase configuration
+│   │   ├── firebase.js         # Firebase configuration
+│   │   └── azure.js            # Azure AD/MSAL configuration
 │   ├── App.jsx                 # Root component
 │   ├── App.css
 │   ├── main.jsx                # Entry point
 │   └── index.css               # Global styles
 ├── index.html
 ├── vite.config.js
+├── staticwebapp.config.json    # Azure Static Web Apps config
 ├── package.json
 ├── .env.example
 ├── .gitignore
-└── README.md
+├── README.md
+└── AZURE_DEPLOYMENT.md         # Azure deployment guide
 ```
 
 ## How It Works
 
 ### Authentication Flow
-1. User visits the app and sees the login page
-2. Clicks "Continue with Google" or "Continue with Apple"
-3. Redirected to provider's authentication page
-4. Upon successful authentication, user is signed in
-5. Dashboard becomes accessible with personalized features
+1. User visits the app and sees the welcome screen with a friendly bear concierge
+2. Clicks "I'm a member" button to access login options
+3. Chooses from Microsoft, Google, or Apple sign-in
+4. Redirected to provider's authentication page
+5. Upon successful authentication, sees "Right this way, sir." transition message
+6. Doors open animation leads to the dashboard (members lounge)
+7. Dashboard becomes accessible with personalized features
 
 ### Dashboard Sections
 
@@ -202,7 +241,21 @@ Modify CSS variables in `src/index.css` to change the color scheme:
 
 ## Deployment
 
-### Firebase Hosting
+### Azure Static Web Apps (Recommended)
+
+The app is configured for Azure Static Web Apps with automatic deployment via GitHub Actions.
+
+**Quick Setup:**
+1. Create Azure Static Web App in Azure Portal
+2. Connect to your GitHub repository
+3. Configure GitHub Secrets (see `AZURE_DEPLOYMENT.md` for details)
+4. Push to main branch - automatic deployment!
+
+**Full Guide:** See [AZURE_DEPLOYMENT.md](./AZURE_DEPLOYMENT.md) for complete instructions.
+
+### Alternative Hosting Options
+
+#### Firebase Hosting
 
 ```bash
 npm install -g firebase-tools
@@ -212,14 +265,14 @@ firebase init hosting
 firebase deploy
 ```
 
-### Netlify
+#### Netlify
 
 1. Connect your GitHub repository to Netlify
 2. Build command: `npm run build`
 3. Publish directory: `dist`
 4. Add environment variables in Netlify dashboard
 
-### Vercel
+#### Vercel
 
 ```bash
 npm install -g vercel
