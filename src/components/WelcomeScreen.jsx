@@ -60,14 +60,14 @@ const WelcomeScreen = () => {
   }
 
   return (
-    <div className="welcome-screen">
+    <div className="welcome-screen" style={{ backgroundImage: 'url(/ConservationCafe.png)' }}>
       <div className="welcome-container">
         <header className="welcome-header">
           <h1>🦋 Camp Monarch</h1>
           <p className="welcome-subtitle">Habitat Restoration Concierge</p>
         </header>
 
-        <main className="welcome-main" style={{ backgroundImage: 'url(/ConservationCafe.png)' }}>
+        <main className="welcome-main">
           <div className="concierge-image">
             <ConciergeAnimal />
           </div>
