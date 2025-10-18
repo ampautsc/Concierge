@@ -19,7 +19,7 @@
 .welcome-main {
   padding: 0;
   text-align: center;
-  background: url('/ConservationCafe.png') center center / cover no-repeat;
+  background: center center / cover no-repeat;
   flex: 1;
   display: flex;
   flex-direction: row;

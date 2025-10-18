@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import Dashboard from './Dashboard';
 import './WelcomeScreen.css';
+import conservationCafeBg from '/ConservationCafe.png';
 
 const WelcomeScreen = () => {
   const { user, loading, error, signInWithGoogle, signInWithApple, signInWithMicrosoft } = useAuth();
@@ -67,7 +68,7 @@ const WelcomeScreen = () => {
           <p className="welcome-subtitle">Habitat Restoration Concierge</p>
         </header>
 
-        <main className="welcome-main">
+        <main className="welcome-main" style={{ backgroundImage: `url(${conservationCafeBg})` }}>
           <div className="concierge-image">
             <ConciergeAnimal />
           </div>
