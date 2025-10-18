@@ -79,7 +79,7 @@
   max-width: 300px; /* 75% of 400px */
   position: absolute;
   left: 10%;
-  top: 75%; /* Moved down so turtle appears to stand on ground */
+  top: 50%;
   transform: translateY(-50%);
   z-index: 2;
 }
@@ -141,6 +141,9 @@
   animation: fadeIn 0.5s ease;
   max-width: 500px;
   margin: 0 auto;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 12px;
 }
 
 .login-options h3 {
