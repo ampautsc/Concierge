@@ -8,9 +8,14 @@ const WelcomeScreen = () => {
   const [showLoginOptions, setShowLoginOptions] = useState(false);
   const [signingIn, setSigningIn] = useState(false);
   const [showTransition, setShowTransition] = useState(false);
+  const [showDoormanDialog, setShowDoormanDialog] = useState(false);
 
   const handleMemberLogin = () => {
     setShowLoginOptions(true);
+  };
+
+  const handleDoormanClick = () => {
+    setShowDoormanDialog(true);
   };
 
   const handleSignIn = async (signInMethod) => {
@@ -68,23 +73,21 @@ const WelcomeScreen = () => {
         </header>
 
         <main className="welcome-main">
-          <div className="welcome-content">
-            <div className="welcome-message">
-              <h2>Welcome to the Habitat Restoration Concierge</h2>
-              <p>Your personal guide to restoring wildlife habitat</p>
-            </div>
+          {/* Clickable doorman area - left side of screen */}
+          <div className="doorman-clickable-area" onClick={handleDoormanClick} title="Talk to the doorman"></div>
 
-            {!showLoginOptions ? (
-              <button 
-                className="member-button"
-                onClick={handleMemberLogin}
-              >
-                Members
-              </button>
-            ) : (
-              <div className="login-options">
-                <h3>Please sign in to continue</h3>
-                <div className="login-buttons">
+          {/* Members button on the door */}
+          {!showLoginOptions ? (
+            <button 
+              className="member-button"
+              onClick={handleMemberLogin}
+            >
+              Members
+            </button>
+          ) : (
+            <div className="login-options">
+              <h3>Please sign in to continue</h3>
+              <div className="login-buttons">
                   <button 
                     onClick={() => handleSignIn(signInWithMicrosoft)} 
                     disabled={signingIn}
@@ -142,13 +145,30 @@ const WelcomeScreen = () => {
                 >
                   ← Back
                 </button>
-              </div>
-            )}
-          </div>
+            </div>
+          )}
 
-          <div className="concierge-image">
-            <ConciergeAnimal />
-          </div>
+          {/* Doorman dialog */}
+          {showDoormanDialog && (
+            <div className="doorman-dialog">
+              <div className="doorman-dialog-content">
+                <button className="dialog-close" onClick={() => setShowDoormanDialog(false)}>×</button>
+                <h3>🐢 Hello! I'm the doorman</h3>
+                <p>Welcome to the Conservation Café! I'm here to help you get started with habitat restoration.</p>
+                <div className="doorman-questions">
+                  <h4>Quick Questions:</h4>
+                  <ul>
+                    <li>What type of habitat are you interested in restoring?</li>
+                    <li>Do you have outdoor space available?</li>
+                    <li>Are you new to native plants?</li>
+                  </ul>
+                  <button className="dialog-button" onClick={() => setShowDoormanDialog(false)}>
+                    Let's get started!
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </main>
 
         <footer className="welcome-footer">
@@ -156,33 +176,6 @@ const WelcomeScreen = () => {
         </footer>
       </div>
     </div>
-  );
-};
-
-// Opossum Doorman Image Component  
-const ConciergeAnimal = ({ animate = false }) => {
-  // Use the opossum doorman image
-  const imageSrc = '/images/OppossumDoorman.png';
-  const fallbackSrc = '/images/bear-concierge.png';
-  
-  return (
-    <img 
-      src={imageSrc}
-      onError={(e) => { 
-        if (e.target.src.endsWith('OppossumDoorman.png')) {
-          e.target.src = fallbackSrc;
-        }
-      }}
-      alt="Opossum Doorman"
-      className={`concierge-animal ${animate ? 'bowing' : ''}`}
-      style={{
-        width: '100%',
-        maxWidth: '400px',
-        height: 'auto',
-        display: 'block',
-        margin: '0 auto'
-      }}
-    />
   );
 };
 
