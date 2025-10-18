@@ -83,7 +83,7 @@ const WelcomeScreen = () => {
                 className="member-button"
                 onClick={handleMemberLogin}
               >
-                I'm a Member
+                Members
               </button>
             ) : (
               <div className="login-options">
