@@ -67,7 +67,7 @@ const WelcomeScreen = () => {
           <p className="welcome-subtitle">Habitat Restoration Concierge</p>
         </header>
 
-        <main className="welcome-main">
+        <main className="welcome-main" style={{ backgroundImage: 'url(/ConservationCafe.png)' }}>
           <div className="concierge-image">
             <ConciergeAnimal />
           </div>
