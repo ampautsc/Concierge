@@ -24,6 +24,8 @@ export const AuthProvider = ({ children }) => {
   const [authProvider, setAuthProvider] = useState(null); // 'firebase', 'azure', or null
 
   useEffect(() => {
+    let unsubscribe = null;
+    
     const initAuth = async () => {
       // Initialize MSAL first
       await initializeMsal();
@@ -43,7 +45,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       // Check for Firebase session
-      const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
         if (firebaseUser) {
           setUser({
             ...firebaseUser,
@@ -56,14 +58,9 @@ export const AuthProvider = ({ children }) => {
         }
         setLoading(false);
       });
-
-      return unsubscribe;
     };
 
-    let unsubscribe;
-    initAuth().then(unsub => {
-      if (unsub) unsubscribe = unsub;
-    });
+    initAuth();
 
     return () => {
       if (unsubscribe) unsubscribe();
