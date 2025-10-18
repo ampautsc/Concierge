@@ -159,23 +159,21 @@ const WelcomeScreen = () => {
   );
 };
 
-// Bear Concierge Image Component  
+// Opossum Doorman Image Component  
 const ConciergeAnimal = ({ animate = false }) => {
-  // Try PNG first, fallback to SVG placeholder
-  // To use the actual image: Download from https://github.com/ampautsc/Concierge/issues/3
-  // and save as public/images/bear-concierge.png
-  const imageSrc = '/images/bear-concierge.png';
-  const fallbackSrc = '/images/bear-concierge.svg';
+  // Use the opossum doorman image
+  const imageSrc = '/images/OppossumDoorman.png';
+  const fallbackSrc = '/images/bear-concierge.png';
   
   return (
     <img 
       src={imageSrc}
       onError={(e) => { 
-        if (e.target.src.endsWith('.png')) {
+        if (e.target.src.endsWith('OppossumDoorman.png')) {
           e.target.src = fallbackSrc;
         }
       }}
-      alt="Bear Concierge"
+      alt="Opossum Doorman"
       className={`concierge-animal ${animate ? 'bowing' : ''}`}
       style={{
         width: '100%',

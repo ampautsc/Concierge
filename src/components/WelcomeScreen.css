@@ -78,6 +78,8 @@
   position: relative;
   z-index: 2;
   flex-shrink: 0;
+  align-self: flex-end; /* Position doorman with feet on ground */
+  margin-bottom: 0; /* Ensure feet touch the floor */
 }
 
 /* Remove desk and menu board - using ConservationCafe background instead */
@@ -107,26 +109,36 @@
 }
 
 .member-button {
-  background: linear-gradient(145deg, #8b7355 0%, #b8956a 50%, #8b7355 100%);
+  /* Wall plaque styling */
+  background: linear-gradient(135deg, #b8956a 0%, #8b7355 50%, #b8956a 100%);
   color: #2a1f15;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
-  border: 2px solid #6b5d4f;
-  padding: 0.9rem 2rem;
-  font-size: 1rem;
-  font-weight: 500;
-  border-radius: 8px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), 0 -1px 1px rgba(255, 255, 255, 0.2);
+  border: 3px solid #6b5d4f;
+  padding: 1.2rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 4px;
   cursor: pointer;
-  box-shadow: 0 3px 8px rgba(107, 93, 79, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
-  text-transform: none;
-  letter-spacing: 0.5px;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-family: "Times New Roman", Times, serif;
+  position: relative;
+  align-self: flex-end; /* Position on opposite side from doorman */
+  margin-bottom: 2rem; /* Align with doorman placement */
 }
 
 .member-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 12px rgba(107, 93, 79, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  background: linear-gradient(145deg, #9a8466 0%, #c9a67b 50%, #9a8466 100%);
+  transform: translateY(-1px);
+  box-shadow: 
+    0 6px 8px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #c9a67b 0%, #9a8466 50%, #c9a67b 100%);
 }
 
 .member-button:active {
