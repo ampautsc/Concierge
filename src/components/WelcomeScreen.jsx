@@ -68,10 +68,6 @@ const WelcomeScreen = () => {
         </header>
 
         <main className="welcome-main">
-          <div className="concierge-image">
-            <ConciergeAnimal />
-          </div>
-
           <div className="welcome-content">
             <div className="welcome-message">
               <h2>Welcome to the Habitat Restoration Concierge</h2>
@@ -148,6 +144,10 @@ const WelcomeScreen = () => {
                 </button>
               </div>
             )}
+          </div>
+
+          <div className="concierge-image">
+            <ConciergeAnimal />
           </div>
         </main>
 
