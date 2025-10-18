@@ -2,8 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: center center / cover no-repeat;
-  background-attachment: fixed;
+  background: center top / cover no-repeat;
 }
 
 .welcome-container {
@@ -25,9 +24,10 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   position: relative;
   min-height: 100vh;
+  padding: 2rem 5%;
 }
 
 /* No overlay - show full background image */
@@ -37,7 +37,6 @@
   position: relative;
   z-index: 1;
   max-width: 550px;
-  margin-right: 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,7 +55,7 @@
   .welcome-main {
     flex-direction: column;
     justify-content: center;
-    padding: 0;
+    padding: 2rem 5%;
   }
   
   .welcome-content {
@@ -75,13 +74,11 @@
 }
 
 .concierge-image {
-  margin: 0 auto 2rem;
-  max-width: 300px; /* 75% of 400px */
-  position: absolute;
-  left: 10%;
-  top: 50%;
-  transform: translateY(-50%);
+  margin: 0;
+  max-width: 300px;
+  position: relative;
   z-index: 2;
+  flex-shrink: 0;
 }
 
 /* Remove desk and menu board - using ConservationCafe background instead */
@@ -366,7 +363,7 @@
   }
 
   .welcome-main {
-    padding: 0;
+    padding: 2rem 5%;
     min-height: 100vh;
   }
 
