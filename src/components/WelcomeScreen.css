@@ -2,6 +2,8 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: center center / cover no-repeat;
+  background-attachment: fixed;
 }
 
 .welcome-container {
@@ -19,7 +21,6 @@
 .welcome-main {
   padding: 0;
   text-align: center;
-  background: center center / contain no-repeat;
   flex: 1;
   display: flex;
   flex-direction: row;
@@ -40,11 +41,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 3rem 2rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  gap: 0;
 }
 
 .concierge-image,
@@ -82,7 +79,7 @@
   max-width: 300px; /* 75% of 400px */
   position: absolute;
   left: 10%;
-  top: 75%; /* Moved down so turtle appears to stand on ground */
+  top: 50%;
   transform: translateY(-50%);
   z-index: 2;
 }
@@ -110,38 +107,30 @@
 }
 
 .welcome-message {
-  margin-bottom: 2rem;
-}
-
-.welcome-message h2 {
-  color: var(--success);
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-.welcome-message p {
-  color: var(--text-secondary);
-  font-size: 1.1rem;
+  display: none;
 }
 
 .member-button {
-  background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%);
-  color: white;
-  border: none;
-  padding: 1.2rem 3rem;
-  font-size: 1.3rem;
-  font-weight: 600;
-  border-radius: 50px;
+  background: linear-gradient(145deg, #8b7355 0%, #b8956a 50%, #8b7355 100%);
+  color: #2a1f15;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+  border: 2px solid #6b5d4f;
+  padding: 0.9rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
   cursor: pointer;
-  box-shadow: 0 6px 20px rgba(45, 80, 22, 0.3);
+  box-shadow: 0 3px 8px rgba(107, 93, 79, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  text-transform: none;
+  letter-spacing: 0.5px;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 .member-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(45, 80, 22, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(107, 93, 79, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background: linear-gradient(145deg, #9a8466 0%, #c9a67b 50%, #9a8466 100%);
 }
 
 .member-button:active {
@@ -152,6 +141,9 @@
   animation: fadeIn 0.5s ease;
   max-width: 500px;
   margin: 0 auto;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 12px;
 }
 
 .login-options h3 {
