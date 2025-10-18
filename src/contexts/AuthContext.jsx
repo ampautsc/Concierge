@@ -5,7 +5,7 @@ import {
   onAuthStateChanged 
 } from 'firebase/auth';
 import { auth, googleProvider, appleProvider } from '../config/firebase';
-import { msalInstance, loginRequest } from '../config/azure';
+import { msalInstance, loginRequest, initializeMsal } from '../config/azure';
 
 const AuthContext = createContext();
 
@@ -24,36 +24,50 @@ export const AuthProvider = ({ children }) => {
   const [authProvider, setAuthProvider] = useState(null); // 'firebase', 'azure', or null
 
   useEffect(() => {
-    // Check for Azure AD session
-    const activeAccount = msalInstance.getActiveAccount();
-    if (activeAccount) {
-      setUser({
-        displayName: activeAccount.name,
-        email: activeAccount.username,
-        uid: activeAccount.localAccountId,
-        provider: 'azure'
-      });
-      setAuthProvider('azure');
-      setLoading(false);
-      return;
-    }
-
-    // Check for Firebase session
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      if (firebaseUser) {
+    const initAuth = async () => {
+      // Initialize MSAL first
+      await initializeMsal();
+      
+      // Check for Azure AD session
+      const activeAccount = msalInstance.getActiveAccount();
+      if (activeAccount) {
         setUser({
-          ...firebaseUser,
-          provider: 'firebase'
+          displayName: activeAccount.name,
+          email: activeAccount.username,
+          uid: activeAccount.localAccountId,
+          provider: 'azure'
         });
-        setAuthProvider('firebase');
-      } else if (!activeAccount) {
-        setUser(null);
-        setAuthProvider(null);
+        setAuthProvider('azure');
+        setLoading(false);
+        return;
       }
-      setLoading(false);
+
+      // Check for Firebase session
+      const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+        if (firebaseUser) {
+          setUser({
+            ...firebaseUser,
+            provider: 'firebase'
+          });
+          setAuthProvider('firebase');
+        } else if (!activeAccount) {
+          setUser(null);
+          setAuthProvider(null);
+        }
+        setLoading(false);
+      });
+
+      return unsubscribe;
+    };
+
+    let unsubscribe;
+    initAuth().then(unsub => {
+      if (unsub) unsubscribe = unsub;
     });
 
-    return unsubscribe;
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
   }, []);
 
   const signInWithGoogle = async () => {

@@ -46,13 +46,20 @@ export const loginRequest = {
 // Initialize MSAL instance
 export const msalInstance = new PublicClientApplication(msalConfig);
 
-// Initialize MSAL
-await msalInstance.initialize();
+// Initialize MSAL (lazy initialization - will be called before use)
+let initializationPromise = null;
 
-// Set active account if available
-const accounts = msalInstance.getAllAccounts();
-if (accounts.length > 0) {
-  msalInstance.setActiveAccount(accounts[0]);
-}
+export const initializeMsal = async () => {
+  if (!initializationPromise) {
+    initializationPromise = msalInstance.initialize().then(() => {
+      // Set active account if available
+      const accounts = msalInstance.getAllAccounts();
+      if (accounts.length > 0) {
+        msalInstance.setActiveAccount(accounts[0]);
+      }
+    });
+  }
+  return initializationPromise;
+};
 
 export default msalInstance;
