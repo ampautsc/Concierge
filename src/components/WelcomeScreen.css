@@ -1,47 +1,93 @@
 .welcome-screen {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
+  flex-direction: column;
 }
 
 .welcome-container {
-  max-width: 800px;
   width: 100%;
-  background: white;
-  border-radius: 24px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
+  background: transparent;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .welcome-header {
-  background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%);
-  color: white;
-  padding: 2rem;
-  text-align: center;
-}
-
-.welcome-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.welcome-subtitle {
-  font-size: 1.2rem;
-  opacity: 0.95;
+  display: none;
 }
 
 .welcome-main {
-  padding: 3rem 2rem;
+  padding: 0;
   text-align: center;
+  background: url('/ConservationCafe.png') center center / cover no-repeat;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* No overlay - show full background image */
+
+/* Content wrapper for message and button */
+.welcome-content {
+  position: relative;
+  z-index: 1;
+  max-width: 550px;
+  margin-right: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.concierge-image,
+.welcome-message,
+.member-button,
+.login-options {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 1024px) {
+  .welcome-main {
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+  }
+  
+  .welcome-content {
+    margin-right: 0;
+    max-width: 100%;
+  }
+  
+  .concierge-image {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    margin: 0 auto 2rem;
+    max-width: 225px; /* 75% for mobile */
+  }
 }
 
 .concierge-image {
   margin: 0 auto 2rem;
-  max-width: 500px;
+  max-width: 300px; /* 75% of 400px */
+  position: absolute;
+  left: 10%;
+  top: 60%; /* Moved down from 50% to appear more forward */
+  transform: translateY(-50%);
+  z-index: 2;
 }
+
+/* Remove desk and menu board - using ConservationCafe background instead */
 
 .concierge-animal {
   width: 100%;
@@ -201,12 +247,24 @@
   color: #c33;
 }
 
-.welcome-footer {
-  background: var(--success);
-  color: white;
-  text-align: center;
-  padding: 1.5rem;
+.error-message .setup-link {
+  margin-top: 0.5rem;
   font-size: 0.9rem;
+  color: #555;
+}
+
+.error-message .setup-link a {
+  color: var(--primary-green);
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.error-message .setup-link a:hover {
+  color: var(--primary-green-dark);
+}
+
+.welcome-footer {
+  display: none;
 }
 
 /* Transition Screen */
@@ -312,23 +370,16 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .welcome-screen {
-    padding: 1rem;
-  }
-
-  .welcome-header h1 {
-    font-size: 2rem;
-  }
-
-  .welcome-subtitle {
-    font-size: 1rem;
+    padding: 0;
   }
 
   .welcome-main {
-    padding: 2rem 1rem;
+    padding: 0;
+    min-height: 100vh;
   }
 
   .concierge-image {
-    max-width: 350px;
+    max-width: 225px; /* 75% of original mobile size */
   }
 
   .welcome-message h2 {
