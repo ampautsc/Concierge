@@ -1,6 +1,5 @@
 .welcome-screen {
   min-height: 100vh;
-  background: linear-gradient(to bottom, #e8f5e9 0%, #f5f7f5 100%);
   display: flex;
   flex-direction: column;
 }
@@ -14,24 +13,11 @@
 }
 
 .welcome-header {
-  background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%);
-  color: white;
-  padding: 2rem;
-  text-align: center;
-}
-
-.welcome-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.welcome-subtitle {
-  font-size: 1.2rem;
-  opacity: 0.95;
+  display: none;
 }
 
 .welcome-main {
-  padding: 3rem 2rem;
+  padding: 0;
   text-align: center;
   background: url('/ConservationCafe.png') center center / cover no-repeat;
   flex: 1;
@@ -40,21 +26,10 @@
   align-items: center;
   justify-content: flex-end;
   position: relative;
-  min-height: 600px;
+  min-height: 100vh;
 }
 
-/* Semi-transparent overlay for better text readability */
-.welcome-main::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.5);
-  pointer-events: none;
-  z-index: 0;
-}
+/* No overlay - show full background image */
 
 /* Content wrapper for message and button */
 .welcome-content {
@@ -80,7 +55,7 @@
   .welcome-main {
     flex-direction: column;
     justify-content: center;
-    padding: 2rem 1rem;
+    padding: 0;
   }
   
   .welcome-content {
@@ -94,27 +69,18 @@
     top: auto;
     transform: none;
     margin: 0 auto 2rem;
+    max-width: 225px; /* 75% for mobile */
   }
 }
 
 .concierge-image {
   margin: 0 auto 2rem;
-  max-width: 400px;
+  max-width: 300px; /* 75% of 400px */
   position: absolute;
   left: 10%;
-  top: 50%;
+  top: 60%; /* Moved down from 50% to appear more forward */
   transform: translateY(-50%);
   z-index: 2;
-}
-
-@media (max-width: 1024px) {
-  .concierge-image {
-    position: relative;
-    left: auto;
-    top: auto;
-    transform: none;
-    margin: 0 auto 2rem;
-  }
 }
 
 /* Remove desk and menu board - using ConservationCafe background instead */
@@ -294,11 +260,7 @@
 }
 
 .welcome-footer {
-  background: var(--success);
-  color: white;
-  text-align: center;
-  padding: 1.5rem;
-  font-size: 0.9rem;
+  display: none;
 }
 
 /* Transition Screen */
@@ -407,25 +369,13 @@
     padding: 0;
   }
 
-  .welcome-header h1 {
-    font-size: 2rem;
-  }
-
-  .welcome-subtitle {
-    font-size: 1rem;
-  }
-
   .welcome-main {
-    padding: 2rem 1rem;
-    min-height: 500px;
-  }
-  
-  .welcome-main::before {
-    background: rgba(255, 255, 255, 0.85);
+    padding: 0;
+    min-height: 100vh;
   }
 
   .concierge-image {
-    max-width: 300px;
+    max-width: 225px; /* 75% of original mobile size */
   }
 
   .welcome-message h2 {
